@@ -1,12 +1,8 @@
-#include <stdio.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <string.h>
-#include <stdlib.h>
-#include <time.h>
-#include <dirent.h>
+#include "my_lib.h"
 
 int main(int ac, char** av) {
+    t_opt* options = get_opt(ac, av);
+    printf("option c [%d], option t [%d]\n", options->c, options->t);
     printf("hello world %d %s\n", ac, av[1]);
     return 0;
 }
