@@ -60,7 +60,8 @@ t_opt* get_opt(int ac, char** av)
         if (is_option(av[index]) == 1)
         {
             check_option_value(av[index + 1]); // if option value contains only digits!
-            // also check if there is an option value aftre option         
+            // also check if there is an option value aftre option
+            // check digits length should be only 4 chars        
             set_option(opt, av[index] + 1, av[index + 1]); // av[index] + 1 -> is a pointer that points to next char in a str
         }
         index += 1;

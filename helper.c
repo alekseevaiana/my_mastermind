@@ -1,4 +1,18 @@
 #include "my_lib.h"
+
+char* my_strcpy(char* dst, char* str)
+{
+    int index;
+    index = 0;
+    while (str[index] != '\0')
+    {
+        dst[index] = str[index];
+        index++;
+    }
+    dst[index] = '\0';
+    return dst;
+}
+
 // copy without malloc
 int my_strcmp(char* a, char* b)
 {

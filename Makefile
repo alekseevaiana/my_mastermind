@@ -5,17 +5,11 @@ OUTPUT = my_mastermind
 
 all: ${OUTPUT}
 
-${OUTPUT}: my_mastermind.o get_opt.o helper.o
-	${CC} ${CC_OPT} my_mastermind.o get_opt.o helper.o -o ${OUTPUT}
+${OUTPUT}: *.o
+	${CC} ${CC_OPT} *.o -o ${OUTPUT}
 
-my_mastermind.o: my_mastermind.c
-	${CC} ${CC_OPT} -c my_mastermind.c
-
-get_opt.o: get_opt.c
-	${CC} ${CC_OPT} -c get_opt.c
-
-helper.o: helper.c
-	${CC} ${CC_OPT} -c helper.c
+*.o: *.c
+	${CC} ${CC_OPT} -c *.c
 
 clean:
 	rm *.o ${OUTPUT}

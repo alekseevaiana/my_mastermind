@@ -5,6 +5,14 @@
 #include <stdlib.h>
 #include <time.h>
 #include <dirent.h>
+#include <unistd.h>
+
+
+#include <linux/stat.h>
+
+#include <stdbool.h>
+#include <fcntl.h>
+#include <ctype.h>
 
 typedef struct t_opt
 {
@@ -24,4 +32,6 @@ typedef struct t_secret_code
 
 t_opt* get_opt(int ac, char** av);
 int is_digits(char* str);
+char* my_strcpy(char* dst, char* str);
+char* read_input(int fd);
 
