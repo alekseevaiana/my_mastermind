@@ -24,11 +24,22 @@ typedef struct t_opt
 
 typedef struct t_secret_code
 {
-    // 0: str[0]
+    // 0: str[0] // with atoi
     // 1: str[1]
     // 2: str[2]
     // 3: str[3]
+    // 
 } t_secret_code;
+
+typedef struct t_user_code
+{
+    // 0: str[0] // with atoi
+    // 1: str[1]
+    // 2: str[2]
+    // 3: str[3]
+    // well_placed int
+    // misplaced int 
+} t_user_code;
 
 t_opt* get_opt(int ac, char** av);
 int is_digits(char* str);
