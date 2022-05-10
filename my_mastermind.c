@@ -30,18 +30,15 @@ t_guess_result check_answer(char* secret, char* answer)
     int index = 0;
     while (answer[index] != '\0')
     {
-        place = find_index(secret, answer[index]); // find index of number (in answ) at secret code // 4533 and 3 from 3333 -> 2
-        // printf("Place is %d, secret[place] is %c\n", place, secret[place]);
+        place = find_index(secret, answer[index]);
         // if index of user input number == secret code number => increase well placed 
         if (place == -1) {
             index++;
             continue;
         }
-        else if (answer[index] == secret[index]) // answer[index 0] 3 secret[index0] 4 // answer[place 2] 3 == secret[place 2] 3
+        else if (answer[index] == secret[index]) 
         {
-            // printf("well placed amount before [%d]\n", result.well_placed_amount);
             result.well_placed_amount += 1;
-            // printf("well placed amount after [%d]\n", result.well_placed_amount);
         } 
         else if (answer[place] != secret[place]) 
         {
@@ -76,12 +73,12 @@ char* read_answer()
 }
 
 bool is_code_valid(char *code) {
+    int index;
     // checks length of code, must be 4 digits
     if (strlen(code) != EXPECTED_ANSWER_LENGTH) {
         return false;
     }
-    // TODO: add validation for each char
-    int index = 0;
+    index = 0;
     while(index < EXPECTED_ANSWER_LENGTH) {
         if(code[index] > '7' || code[index] < '0') {
             printf("Each digit must be between 0 and 7 included\n");
@@ -99,13 +96,11 @@ void get_random(t_opt* options) {
     srand(time(NULL));
     while(index < EXPECTED_ANSWER_LENGTH) {
         random = rand() % 8;
-        // printf("random number is original %d, and char is %c\n", random, random + '0');
         options->c_val[index] = random + '0';
-        // printf("option letter is %c\n", options->c_val[index]);
         index++;
     }
     options->c_val[index] = '\0';
-    printf("NEW SECRET RANDOM IS %s\n", options->c_val);
+    // printf("NEW SECRET RANDOM IS %s\n", options->c_val);
 }
 
 
@@ -146,7 +141,7 @@ int main(int ac, char** av) {
             printf("Well placed pieces: %d\n", guess.well_placed_amount);
             printf("Misplaced pieces: %d\n", guess.missplaced_amount);
         } else {
-            printf("Wrong input!\n");
+            printf("Wrong input! Try again\n");
         }
         attempt++;
         free(answer);

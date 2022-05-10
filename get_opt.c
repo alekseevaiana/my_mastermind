@@ -59,13 +59,12 @@ t_opt* get_opt(int ac, char** av)
     {
         if (is_option(av[index]) == 1)
         {
-            check_option_value(av[index + 1]); // if option value contains only digits!
+            check_option_value(av[index + 1]);
             // also check if there is an option value aftre option
-            // check digits length should be only 4 chars        
-            set_option(opt, av[index] + 1, av[index + 1]); // av[index] + 1 -> is a pointer that points to next char in a str
+            // check digits length should be only 4 chars      
+            set_option(opt, av[index] + 1, av[index + 1]);
         }
         index += 1;
     }
-    printf("options: t attempts is: %d,\noption: c is: %s\n", opt->t_val, opt->c_val);
     return opt;
 }
