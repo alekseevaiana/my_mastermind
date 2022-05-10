@@ -4,16 +4,51 @@
 #define EXPECTED_ANSWER_LENGTH 4
 #define EXPECTED_INPUT_LENGTH (EXPECTED_ANSWER_LENGTH + 1)
 
+int find_index(char* string, char number) 
+{
+    int index;
+    index = 0;
+    while(string[index] != '\0')
+    {
+        if(number == string[index]) 
+        {
+            return index;
+        }
+        index++;
+    }
+    return -1;
+}
+
 // Function that compares secret and answer and return number of well placed and missplaced
 // Function expects inputs are valid
-t_guess_result check_answer(char* secret, char* answer) {
+t_guess_result check_answer(char* secret, char* answer) 
+{
     t_guess_result result;
-    printf("secret code is %s\n", secret);
-    printf("input answer %s\n", answer);
-    result.missplaced_amount = 1;
-    result.well_placed_amount = 3;
-    // TODO: all
-
+    result.missplaced_amount = 0;
+    result.well_placed_amount = 0;
+    int place;
+    int index = 0;
+    while (answer[index] != '\0')
+    {
+        place = find_index(secret, answer[index]); // find index of number (in answ) at secret code // 4533 and 3 from 3333 -> 2
+        // printf("Place is %d, secret[place] is %c\n", place, secret[place]);
+        // if index of user input number == secret code number => increase well placed 
+        if (place == -1) {
+            index++;
+            continue;
+        }
+        else if (answer[index] == secret[index]) // answer[index 0] 3 secret[index0] 4 // answer[place 2] 3 == secret[place 2] 3
+        {
+            // printf("well placed amount before [%d]\n", result.well_placed_amount);
+            result.well_placed_amount += 1;
+            // printf("well placed amount after [%d]\n", result.well_placed_amount);
+        } 
+        else if (answer[place] != secret[place]) 
+        {
+            result.missplaced_amount += 1;
+        }
+        index++;
+    }
     return result;
 }
 
@@ -57,26 +92,28 @@ bool is_code_valid(char *code) {
     return true;
 }
 
+void get_random(t_opt* options) {
+    int random;
+    options->c_val = malloc(sizeof(char) * EXPECTED_INPUT_LENGTH);
+    int index = 0;
+    srand(time(NULL));
+    while(index < EXPECTED_ANSWER_LENGTH) {
+        random = rand() % 8;
+        // printf("random number is original %d, and char is %c\n", random, random + '0');
+        options->c_val[index] = random + '0';
+        // printf("option letter is %c\n", options->c_val[index]);
+        index++;
+    }
+    options->c_val[index] = '\0';
+    printf("NEW SECRET RANDOM IS %s\n", options->c_val);
+}
+
 
 int main(int ac, char** av) {
-    int random;
     t_opt* options = get_opt(ac, av);
     
     if(strlen(options->c_val) == 0) {
-        // generate secret code if opt->c_val (secret code) is ""
-        options->c_val = malloc(sizeof(char) * EXPECTED_INPUT_LENGTH);
-        int index = 0;
-        srand(time(NULL));
-        while(index < EXPECTED_ANSWER_LENGTH) {
-            random = rand() % 8;
-            printf("random number is original %d, and char is %c\n", random, random + '0');
-            // TODO: integer to str
-            options->c_val[index] = random + '0';
-            printf("option letter is %c\n", options->c_val[index]);
-            index++;
-        }
-        options->c_val[index] = '\0';
-        printf("NEW SECRET RANDOM IS %s\n", options->c_val);
+        get_random(options);
     }
 
     if (!is_code_valid(options->c_val) ) {
@@ -100,6 +137,9 @@ int main(int ac, char** av) {
             // WHEN WON
             if (guess.well_placed_amount == EXPECTED_ANSWER_LENGTH) {
                 printf("Congratz! You did it!\n");
+                free(answer);
+                free(options->c_val);
+                free(options);
                 return 0;
             }
 
@@ -115,37 +155,4 @@ int main(int ac, char** av) {
     printf("Exeded amount of attempts\n");
     free(options);
     return 1;
-}
-
-
-int main2(int ac, char** av) {
-    t_opt* options = get_opt(ac, av);
-    int random;
-    int secret_code = strlen(options->c_val);
-    printf("====> Will you find the secret code?\n");
-    printf("len of secret code %d\n", secret_code);
-    printf("---\n");
-
-    if(strlen(options->c_val) == 0) {
-        // generate secret code if opt->c_val (secret code) is ""
-        int index = 0;
-        srand(time(NULL));
-        while(index <= 4) {
-            random = rand() % 8;
-            printf("random number is %d\n", random);
-            
-            index++;
-        }
-        srand(time(NULL));
-        random = rand() % 8;
-        printf("random number is %d\n", random);
-
-    }
-    // run loop on every attempt (-t). 10 attempts by default
-    // read input from user
-    //          -> must be 4 digits every one is from 0 - 7
-    // store input in a struct or an object
-    // compare input and secret code
-    free(options);
-    return 0;
 }
