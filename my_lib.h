@@ -14,32 +14,21 @@
 #include <fcntl.h>
 #include <ctype.h>
 
+
+
 typedef struct t_opt
 {
     int t;
     int c;
     int t_val; // attempts
-    char* c_val;
+    char* c_val; // secret code
 } t_opt;
 
-typedef struct t_secret_code
+typedef struct t_guess_result
 {
-    // 0: str[0] // with atoi
-    // 1: str[1]
-    // 2: str[2]
-    // 3: str[3]
-    // 
-} t_secret_code;
-
-typedef struct t_user_code
-{
-    // 0: str[0] // with atoi
-    // 1: str[1]
-    // 2: str[2]
-    // 3: str[3]
-    // well_placed int
-    // misplaced int 
-} t_user_code;
+    int well_placed_amount;
+    int missplaced_amount;
+} t_guess_result;
 
 t_opt* get_opt(int ac, char** av);
 int is_digits(char* str);

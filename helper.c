@@ -1,5 +1,43 @@
 #include "my_lib.h"
 
+void my_putchar(char c)
+{
+    write(1, &c, 1);
+}
+
+int u_decimal_to_str(unsigned int nb)
+{
+    int i;
+
+    i = 0;
+    if (nb >= 10)
+    {
+        i = i + u_decimal_to_str(nb / 10);
+        i = i + u_decimal_to_str(nb % 10);
+    }
+    else
+    {
+        my_putchar(nb + '0');
+        i++;
+    }
+    return i;
+}
+
+int decimal_to_str(int nb)
+{
+    int i;
+
+    i = 0;
+    if (nb < 0)
+    {
+        nb = nb * -1;
+        my_putchar('-');
+        i++;
+    }
+    i = i + u_decimal_to_str(nb);
+    return i;
+}
+
 char* my_strcpy(char* dst, char* str)
 {
     int index;
