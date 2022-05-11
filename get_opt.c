@@ -1,7 +1,5 @@
 #include "my_lib.h"
 
-
-// read only str with "-" like -t or -c or -ct
 void set_option(t_opt* opt, char* str, char* opt_str)
 {
     int index;
@@ -28,19 +26,6 @@ int is_option(char* str)
     {
         return 1;
     }
-    return 0;
-}
-
-int check_option_value(char* str)
-{
-    if (is_digits(str) == 1)
-    {
-        printf("WRONG INPUT MUST CONTAIN ONLY DIGITS\n");
-        return 1;
-    };
-
-    // also check if there is an option value aftre option
-            // check digits length should be only 4 chars    
     return 0;
 }
 

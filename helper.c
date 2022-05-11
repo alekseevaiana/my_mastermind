@@ -5,37 +5,19 @@ void my_putchar(char c)
     write(1, &c, 1);
 }
 
-int u_decimal_to_str(unsigned int nb)
+int find_index(char* string, char number) 
 {
-    int i;
-
-    i = 0;
-    if (nb >= 10)
+    int index;
+    index = 0;
+    while(string[index] != '\0')
     {
-        i = i + u_decimal_to_str(nb / 10);
-        i = i + u_decimal_to_str(nb % 10);
+        if(number == string[index]) 
+        {
+            return index;
+        }
+        index++;
     }
-    else
-    {
-        my_putchar(nb + '0');
-        i++;
-    }
-    return i;
-}
-
-int decimal_to_str(int nb)
-{
-    int i;
-
-    i = 0;
-    if (nb < 0)
-    {
-        nb = nb * -1;
-        my_putchar('-');
-        i++;
-    }
-    i = i + u_decimal_to_str(nb);
-    return i;
+    return -1;
 }
 
 char* my_strcpy(char* dst, char* str)
