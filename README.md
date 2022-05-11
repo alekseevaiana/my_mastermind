@@ -20,7 +20,7 @@ Your program will also receive the following parameters:
 -t [ATTEMPTS]: specifies the number of attempts; by default, the playerhas 10 attempts.
 
 ## Description
-The program is written in C language.
+The program is written in C language and has a Makefile.
 I did the following steps:
 - get options from the command
 - if no options are provided, the program generates default options (for secret code I generated a random number)

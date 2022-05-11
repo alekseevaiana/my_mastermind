@@ -36,7 +36,11 @@ int check_option_value(char* str)
     if (is_digits(str) == 1)
     {
         printf("WRONG INPUT MUST CONTAIN ONLY DIGITS\n");
+        return 1;
     };
+
+    // also check if there is an option value aftre option
+            // check digits length should be only 4 chars    
     return 0;
 }
 
@@ -58,10 +62,7 @@ t_opt* get_opt(int ac, char** av)
     while (index < ac)
     {
         if (is_option(av[index]) == 1)
-        {
-            check_option_value(av[index + 1]);
-            // also check if there is an option value aftre option
-            // check digits length should be only 4 chars      
+        {   
             set_option(opt, av[index] + 1, av[index + 1]);
         }
         index += 1;

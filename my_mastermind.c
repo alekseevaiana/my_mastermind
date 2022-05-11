@@ -106,13 +106,18 @@ void get_random(t_opt* options) {
 
 int main(int ac, char** av) {
     t_opt* options = get_opt(ac, av);
-    
+    printf("option -c val is %s, and option -c is %d\n", options->c_val, options->c);
+    if(options->c == 1 && strlen(options->c_val) < 2) {
+        printf("Wrong option value after -c\n");
+        return 1;
+    }
     if(strlen(options->c_val) == 0) {
         get_random(options);
     }
-
+    
     if (!is_code_valid(options->c_val) ) {
         printf("Secret is invalid\n");
+        free(options);
         return 1;
     }
 
@@ -148,6 +153,8 @@ int main(int ac, char** av) {
         printf("---\n");
     }
     printf("Exeded amount of attempts\n");
+    printf("The right answer was %s\n", options->c_val);
+    free(options->c_val);
     free(options);
     return 1;
 }

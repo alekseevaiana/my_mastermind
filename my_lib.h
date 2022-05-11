@@ -34,4 +34,5 @@ t_opt* get_opt(int ac, char** av);
 int is_digits(char* str);
 char* my_strcpy(char* dst, char* str);
 char* read_input(int fd);
+char* my_strdup(char* str);
 
