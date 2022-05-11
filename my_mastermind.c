@@ -137,7 +137,6 @@ int main(int ac, char** av)
             {
                 printf("Congratz! You did it!\n");
                 free(answer);
-                free(options->c_val);
                 free(options);
                 return 0;
             }
@@ -155,7 +154,6 @@ int main(int ac, char** av)
     }
     printf("Exeded amount of attempts\n");
     printf("The right answer was %s\n", options->c_val);
-    free(options->c_val);
     free(options);
     return 1;
 }
