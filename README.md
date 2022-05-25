@@ -39,6 +39,11 @@ With no options (secret code is random and default attempts number is 10)
 With options:
 `./my_mastermind -t 5 -c 7543` where -t: attempts, and -c: secret code
 
+## Preview
+
+
+<img width="433" alt="Screen Shot 2022-05-16 at 4 17 57 PM" src="https://user-images.githubusercontent.com/36742189/170331012-8bf3705b-c0d0-420e-b0a9-1bb99296dc25.png">
+
 ### The Core Team
 
 
